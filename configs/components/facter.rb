@@ -5,6 +5,7 @@ component "facter" do |pkg, settings, platform|
 
   flags = " --bindir=#{settings[:bindir]} \
             --sitelibdir=#{settings[:ruby_vendordir]} \
+            --man \
             --mandir=#{settings[:mandir]} \
             --ruby=#{File.join(settings[:bindir], 'ruby')} "
 
@@ -19,10 +20,12 @@ component "facter" do |pkg, settings, platform|
   end
 
   pkg.install do
-    ["#{settings[:host_ruby]} install.rb \
-    --no-batch-files \
-    --no-configs \
-    #{flags}"]
+    [
+      "#{settings[:host_ruby]} install.rb \
+      --no-batch-files \
+      --no-configs \
+      #{flags}"
+    ]
   end
 
   pkg.install_file "facter.gemspec", "#{settings[:gem_home]}/specifications/#{pkg.get_name}-#{pkg.get_version_forced}.gemspec"
