@@ -24,6 +24,7 @@ PLATFORM_LIST = [
     'el-9-ppc64le',
     'fedora-36-x86_64',
     'fedora-40-x86_64',
+    'fedora-40-aarch64',
     'sles-15-x86_64',
     'ubuntu-18.04-aarch64',
     'ubuntu-18.04-amd64',

@@ -235,3 +235,12 @@ index e750bc991..2662015fc 100644
 -  plat.vmpooler_template "ubuntu-2004-x86_64"
 +  plat.inherit_from_default
  end
+diff --git a/configs/platforms/fedora-40-aarch64.rb b/configs/platforms/fedora-40-aarch64.rb
+new file mode 100644
+index 0000000..0503231
+--- /dev/null
++++ b/configs/platforms/fedora-40-aarch64.rb
+@@ -0,0 +1,3 @@
++platform 'fedora-40-aarch64' do |plat|
++  plat.inherit_from_default
++end
