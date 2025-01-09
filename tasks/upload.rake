@@ -5,7 +5,7 @@ namespace :vox do
   task :upload, [:tag, :platform] do |_, args|
     endpoint = ENV.fetch('ENDPOINT_URL')
     bucket = ENV.fetch('BUCKET_NAME')
-    component = 'puppet-agent'
+    component = 'openvox-agent'
     platform = args[:platform] || ''
 
     abort 'You must set the ENDPOINT_URL environment variable to the S3 server you want to upload to.' if endpoint.nil? || endpoint.empty?

@@ -1,4 +1,4 @@
-project "puppet-agent" do |proj|
+project 'openvox-agent' do |proj|
   platform = proj.get_platform
 
   # puppet-agent inherits most build settings from openvoxproject/puppet-runtime:
