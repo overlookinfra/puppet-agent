@@ -30,7 +30,7 @@ project "puppet-agent" do |proj|
     proj.signing_command 'security -q unlock-keychain -p \$$OSX_SIGNING_KEYCHAIN_PW \$$OSX_SIGNING_KEYCHAIN; codesign --timestamp --keychain \$$OSX_SIGNING_KEYCHAIN -vfs \"\$$OSX_CODESIGNING_CERT\"'
   end
 
-  if platform.is_fedora?
+  if platform.is_fedora? || platform.name =~ /el-10/
     proj.package_override("# Disable check-rpaths since /opt/* is not a valid path\n%global __brp_check_rpaths %{nil}")
     proj.package_override("# Disable the removal of la files, they are still required\n%global __brp_remove_la_files %{nil}")
   end

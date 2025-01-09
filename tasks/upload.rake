@@ -5,7 +5,7 @@ namespace :vox do
   task :upload, [:tag, :platform] do |_, args|
     endpoint = ENV.fetch('ENDPOINT_URL')
     bucket = ENV.fetch('BUCKET_NAME')
-    repo = 'puppet-agent'
+    component = 'puppet-agent'
     platform = args[:platform] || ''
 
     abort 'You must set the ENDPOINT_URL environment variable to the S3 server you want to upload to.' if endpoint.nil? || endpoint.empty?
@@ -21,7 +21,7 @@ namespace :vox do
     files = Dir.glob("#{__dir__}/../output/*#{munged_tag}*#{platform}*")
     puts 'No files for the given tag found in the output directory.' if files.empty?
 
-    path = "s3://#{bucket}/#{repo}/#{args[:tag]}"
+    path = "s3://#{bucket}/#{component}/#{args[:tag]}"
     files.each do |f|
       puts "Uploading #{File.basename(f)}"
       run_command("#{s3} cp #{f} #{path}/#{File.basename(f)} --endpoint-url=#{endpoint}")
