@@ -1,17 +1,17 @@
+def run_command(cmd)
+  output, status = Open3.capture2e(cmd)
+  abort "Command failed! Command: #{cmd}, Output: #{output}" unless status.exitstatus.zero?
+  output.chomp
+end
+
+Dir.glob(File.join('tasks/**/*.rake')).each { |file| load file }
+
+### Puppetlabs stuff ###
 require 'packaging'
 
 load './ext/release-lead.rake'
 
 Pkg::Util::RakeUtils.load_packaging_tasks
-
-namespace :package do
-  task :bootstrap do
-    puts 'Bootstrap is no longer needed, using packaging-as-a-gem'
-  end
-  task :implode do
-    puts 'Implode is no longer needed, using packaging-as-a-gem'
-  end
-end
 
 desc 'run static analysis with rubocop'
 task(:rubocop) do
