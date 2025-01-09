@@ -48,7 +48,7 @@ component "puppet" do |pkg, settings, platform|
         pkg.install_service "ext/redhat/client.init", "ext/redhat/client.sysconfig", init_system: servicetype
       end
     when "launchd"
-      pkg.install_service "ext/osx/puppet.plist", nil, "com.puppetlabs.puppet", init_system: servicetype
+      pkg.install_service "ext/osx/puppet.plist", nil, "org.voxpupuli.puppet", init_system: servicetype
     when "smf"
       pkg.install_service "ext/solaris/smf/puppet.xml", "ext/solaris/smf/puppet", service_type: "network", init_system: servicetype
     when "aix"

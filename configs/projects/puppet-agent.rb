@@ -1,7 +1,7 @@
 project "puppet-agent" do |proj|
   platform = proj.get_platform
 
-  # puppet-agent inherits most build settings from puppetlabs/puppet-runtime:
+  # puppet-agent inherits most build settings from openvoxproject/puppet-runtime:
   # - Modifications to global settings like flags and target directories should be made in puppet-runtime.
   # - Settings included in this file should apply only to local components in this repository.
   runtime_details = JSON.parse(File.read('configs/components/puppet-runtime.json'))
@@ -42,23 +42,23 @@ project "puppet-agent" do |proj|
 
   # Project level settings our components will care about
   if platform.is_windows?
-    proj.setting(:company_name, "Puppet Inc")
-    proj.setting(:pl_company_name, "Puppet Labs")
+    proj.setting(:company_name, "Vox Pupuli")
+    proj.setting(:pl_company_name, "Vox Pupuli")
     proj.setting(:common_product_id, "PuppetInstaller")
     proj.setting(:puppet_service_name, "puppet")
     proj.setting(:upgrade_code, "2AD3D11C-61B3-4710-B106-B4FDEC5FA358")
     if platform.architecture == "x64"
-      proj.setting(:product_name, "Puppet Agent (64-bit)")
+      proj.setting(:product_name, "OpenVox Agent (64-bit)")
       proj.setting(:win64, "yes")
       proj.setting(:RememberedInstallDirRegKey, "RememberedInstallDir64")
     else
-      proj.setting(:product_name, "Puppet Agent")
+      proj.setting(:product_name, "OpenVox Agent")
       proj.setting(:win64, "no")
       proj.setting(:RememberedInstallDirRegKey, "RememberedInstallDir")
     end
     proj.setting(:links, {
-        :HelpLink => "http://puppet.com/services/customer-support",
-        :CommunityLink => "http://puppet.com/community",
+        :HelpLink => "https://github.com/OpenVoxProject",
+        :CommunityLink => "https://voxpupuli.org",
         :ForgeLink => "http://forge.puppet.com",
         :NextStepLink => "https://docs.puppet.com/pe/latest/quick_start_install_agents_windows.html",
         :ManualLink => "https://docs.puppet.com/puppet/latest/reference",
@@ -84,18 +84,18 @@ project "puppet-agent" do |proj|
 
   proj.setting(:service_conf, File.join(proj.install_root, 'service_conf'))
 
-  proj.description "The Puppet Agent package contains all of the elements needed to run puppet, including ruby, facter, and hiera."
+  proj.description "The OpenVox Agent package contains all of the elements needed to run the agent, including ruby and facter."
   proj.version_from_git
   proj.write_version_file File.join(proj.prefix, 'VERSION')
   proj.license "See components"
-  proj.vendor "Puppet Labs <info@puppetlabs.com>"
-  proj.homepage "https://www.puppetlabs.com"
-  proj.target_repo "puppet7"
+  proj.vendor "Vox Pupuli <voxpupuli@groups.io>"
+  proj.homepage "https://voxpupuli.org"
+  proj.target_repo "openvox7"
 
   if platform.is_solaris?
-    proj.identifier "puppetlabs.com"
+    proj.identifier "voxpupuli.org"
   elsif platform.is_macos?
-    proj.identifier "com.puppetlabs"
+    proj.identifier "org.voxpupuli"
   end
 
   # For some platforms the default doc location for the BOM does not exist or is incorrect - move it to specified directory
