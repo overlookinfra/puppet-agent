@@ -81,8 +81,8 @@ component "pxp-agent" do |pkg, settings, platform|
       end
       pkg.install_configfile "#{service_conf}/pxp-agent.logrotate", '/etc/logrotate.d/pxp-agent'
     when 'launchd'
-      pkg.install_service "#{service_conf}/osx/pxp-agent.plist", nil, 'com.puppetlabs.pxp-agent', init_system: servicetype
-      pkg.install_configfile "#{service_conf}/osx/pxp-agent.newsyslog.conf", '/etc/newsyslog.d/com.puppetlabs.pxp-agent.conf'
+      pkg.install_service "#{service_conf}/osx/pxp-agent.plist", nil, 'org.voxpupuli.pxp-agent', init_system: servicetype
+      pkg.install_configfile "#{service_conf}/osx/pxp-agent.newsyslog.conf", '/etc/newsyslog.d/org.voxpupuli.pxp-agent.conf'
     when 'smf'
       pkg.install_service "#{service_conf}/solaris/smf/pxp-agent.xml", service_type: 'network', init_system: servicetype
     when 'aix'
