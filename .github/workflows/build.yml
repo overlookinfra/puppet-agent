@@ -1,4 +1,4 @@
-name: Build pxp-agent
+name: Build openvox-agent
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ on:
       project_name:
         description: 'The vanagon project to build'
         required: false
-        default: 'puppet-agent'
+        default: 'openvox-agent'
       platform_list:
         description: 'A comma-separated list of platforms to build for. Do not include spaces. If not provided, will use the default list of platform supported by OpenVox.'
         required: false
