@@ -6,7 +6,13 @@ namespace :vox do
     endpoint = ENV.fetch('ENDPOINT_URL')
     bucket = ENV.fetch('BUCKET_NAME')
     component = 'openvox-agent'
-    platform = args[:platform] || ''
+    os = nil
+    arch = nil
+    if args[:platform]
+      parts = args[:platform].split('-')
+      os = parts[0] + parts[1]
+      arch = parts[2]
+    end
 
     abort 'You must set the ENDPOINT_URL environment variable to the S3 server you want to upload to.' if endpoint.nil? || endpoint.empty?
     abort 'You must set the BUCKET_NAME environment variable to the S3 bucket you are uploading to.' if bucket.nil? || bucket.empty?
@@ -18,13 +24,20 @@ namespace :vox do
     # Ensure the AWS CLI isn't going to fail with the given parameters
     run_command("#{s3} ls s3://#{bucket}/")
 
-    files = Dir.glob("#{__dir__}/../output/*#{munged_tag}*#{platform}*")
+    glob = "#{__dir__}/../output/**/*#{munged_tag}*"
+    if os
+      # "arch" is not used here because we are currently horrifyingly
+      # inconsistent with the platform -> package name
+      # (e.g. debian-12-aarch64 ends up as debian12.arm64).
+      glob += "#{os}*"
+    end
+    files = Dir.glob(glob)
     puts 'No files for the given tag found in the output directory.' if files.empty?
 
     path = "s3://#{bucket}/#{component}/#{args[:tag]}"
     files.each do |f|
       puts "Uploading #{File.basename(f)}"
-      run_command("#{s3} cp #{f} #{path}/#{File.basename(f)} --endpoint-url=#{endpoint}")
+      run_command("#{s3} cp #{f} #{path}/#{File.basename(f)}")
     end
   end
 end
