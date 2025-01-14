@@ -10,7 +10,7 @@ namespace :vox do
     arch = nil
     if args[:platform]
       parts = args[:platform].split('-')
-      os = parts[0] + parts[1]
+      os = parts[0].gsub('fedora','fc') + parts[1]
       arch = parts[2]
     end
 
@@ -32,7 +32,7 @@ namespace :vox do
       glob += "#{os}*"
     end
     files = Dir.glob(glob)
-    puts 'No files for the given tag found in the output directory.' if files.empty?
+    abort 'No files for the given tag found in the output directory.' if files.empty?
 
     path = "s3://#{bucket}/#{component}/#{args[:tag]}"
     files.each do |f|
