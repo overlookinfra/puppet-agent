@@ -88,7 +88,7 @@ project 'openvox-agent' do |proj|
   proj.version_from_git
   proj.write_version_file File.join(proj.prefix, 'VERSION')
   proj.license "See components"
-  proj.vendor "Vox Pupuli <voxpupuli@groups.io>"
+  proj.vendor "Vox Pupuli <openvox@voxpupuli.org>"
   proj.homepage "https://voxpupuli.org"
   proj.target_repo "openvox7"
 
