@@ -10,7 +10,7 @@ namespace :vox do
 
     munged = args[:tag].gsub('-', '.')
     data = <<~DATA
-      {"location":"https://s3.osuosl.org/puppet-artifacts/#{args[:component]}/#{args[:tag]}/","version":"#{munged}"}
+      {"location":"https://s3.osuosl.org/openvox-artifacts/#{args[:component]}/#{args[:tag]}/","version":"#{munged}"}
     DATA
 
     puts "Writing #{args[:component]}.json"
