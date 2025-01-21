@@ -9,6 +9,8 @@ namespace :vox do
     args.with_defaults(project: 'puppet-agent')
     project = args[:project]
 
+    ENV['SOURCE_DATE_EPOCH'] = `git log -1 --format=%ct`.chomp
+
     abort 'You must provide a platform.' if args[:platform].nil? || args[:platform].empty?
     platform = args[:platform]
 
