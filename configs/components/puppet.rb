@@ -47,6 +47,9 @@ component "puppet" do |pkg, settings, platform|
     puppet_bin = "/opt/puppetlabs/bin/puppet"
     rpm_statedir = "%{_localstatedir}/lib/rpm-state/#{pkg.get_name}"
     service_statefile = "#{rpm_statedir}/service_state"
+    pkg.replaces('puppet-agent')
+    pkg.conflicts('puppet-agent')
+    pkg.provides('puppet-agent')
     pkg.add_preinstall_action ["upgrade"],
       [<<-HERE.undent
         mkdir -p  #{rpm_statedir} && chown root #{rpm_statedir} && chmod 0700 #{rpm_statedir} || :
